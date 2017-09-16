@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>  <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.zjcds.xa.dao.IDataRsDirDao">
+	<!--  <resultMap type="com.zjcds.xa.bean.UserInfoBean" id="user_xx">
+		<id property="USERID" column="USERID"></id>
+		<id property="GROUPID" column="GROUPID"></id>
+		<id property="GROUPNAME" column="GROUPNAME"></id>
+		<id property="USERNAME" column="USERNAME"></id>
+		<id property="LOGIN_NAME" column="LOGIN_NAME"></id>
+		<id property="PASSWORD" column="PASSWORD"></id>
+	</resultMap>   -->
+	
+	<select id="getDataScan" parameterType="string" resultType="com.zjcds.xa.bean.DataScanBean">
+	  select t.id,t.id,
+            t.data_from_dept,
+            t.data_from_system,
+            t.data_etl_type,
+            t.data_etl_freq,
+            t.data_tab_rows,
+            t.data_space_usage from DATA_SCAN t
+</select>
+    <select id="getDataTabs" parameterType="HashMap" resultType="com.zjcds.xa.bean.DataTabBean">
+        SELECT * FROM
+        (
+        SELECT A.*, ROWNUM RN
+        FROM ( select t.tab_name, t.tab_comment, t.tab_rows
+        from V_TAB_SCAN t
+        group by t.tab_name, t.tab_comment, t.tab_rows
+        order by t.tab_rows desc) A
+        )
+        WHERE RN &gt;= #{start} and RN &lt;=#{end}
+
+    </select>
+    <insert id="addData" parameterType="HashMap">
+ insert into data_rs_regist(
+        id,
+        data_dept,
+        data_group ,
+        data_gettype,
+        data_name,
+        tab_rg_time
+      )values(
+       1,
+       #{data_dept},
+       #{data_group},
+       #{data_gettype},
+       #{data_name},
+       to_char(sysdate, 'yyyy-mm-dd')
+      )
+    </insert>
+    <insert id="addService" parameterType="HashMap">
+        insert into data_service_regist(
+        id,
+        service_dept,
+        service_group ,
+        service_name,
+        service_gettype,
+        service_description,
+        service_rg_time
+        )values(
+        1,
+        #{service_dept},
+        #{service_group},
+        #{service_name},
+        #{service_gettype},
+        #{service_description},
+        to_char(sysdate, 'yyyy-mm-dd')
+        )
+
+    </insert>
+    <select id="getTreeData" parameterType="HashMap" resultType="HashMap">
+      SELECT * FROM
+        (
+        SELECT A.*, ROWNUM RN
+        FROM(select tt.tab_name, tt.tab_rows, tt.tab_comment,tab_rg_time
+  from tab_scan tt, data_rs_regist t
+ where tt.tab_name = t.data_gettype and t.tree_id=#{tree_id}
+ group by tt.tab_name, tt.tab_rows, tt.tab_comment , tab_rg_time order by  tt.tab_rows desc)A
+        )
+        WHERE RN &gt;= #{start} and RN &lt;=#{end}
+
+    </select>
+    <select id="getTreeService" parameterType="HashMap" resultType="HashMap">
+        SELECT * FROM (SELECT A.*, ROWNUM RN
+        FROM(select *
+        from  data_service_regist t
+        where t.tree_id=#{tree_id})A
+        )
+        WHERE RN &gt;= #{start} and RN &lt;=#{end}
+
+    </select>
+	<!--  
+	<insert id="addUser" parameterType="user_xx">    
+	    insert into usertable(userid,username,password)  values(userid_seq.nextval,#{userName},#{password})  
+	 </insert>   
+	 <update id="updateUser" parameterType="user_xx">    
+        update usertable set username=#{userName},password=#{password}  where userid=#{userId}    
+     </update> 
+     -->
+</mapper>

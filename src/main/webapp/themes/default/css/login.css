@@ -1,0 +1,111 @@
+body { 
+	margin:0 auto; 
+	font-size:12px; font-family:Verdana; line-height:1.5;width:80%
+}
+ul,dl,dd,h1,h2,h3,h4,h5,h6,form,p { 
+	padding:0; margin:0;
+}
+a,input,button {outline:none;}
+
+
+#top{
+	color:#0099cc;
+	font-size: 36px;
+	font-weight:bold;
+	font-family:"方正超粗黑简体","黑体","宋体";
+	letter-spacing:4px;
+	height:150px;
+	margin:10px 5px;
+	
+}
+#content{
+	height:50%;
+}
+#leftimage{
+	float:left;
+	width:500px;
+	height:250px;
+	background: url("../images/login-image.png") no-repeat;
+}		
+#rightpanel{
+	margin-left:600px;
+}
+.login-textInput {
+	vertical-align:top;
+	background: url("../images/blue/input-login-n.png") no-repeat;
+	height: 45px;
+	padding-top:7px;
+	padding-bottom:6px;
+	font-size:12px;
+	width: 380px;
+	border: 0px;
+	padding-left: 10px;
+	padding-right:6px;
+	outline: none;
+	font-family: "宋体",Verdana, Arial,Sans;
+	color: #999999;
+	margin-top:10px;
+}
+.login-textInput:hover {
+	background: url("../images/blue/input-login-f.png") no-repeat;
+}
+
+.login-textInput:focus {
+	background: url("../images/blue/input-login-f.png") no-repeat;
+}
+
+.login-checkbox{
+
+	height:30px;
+	line-height: 30px;
+	vertical-align: middle;
+}
+#checkbox_remember{
+	border: 0px;
+	outline: none;
+	vertical-align: middle;
+}
+#checkbox_remember:checked{outline:none;}
+#checkbox_remember::-moz-focus-inner{outline:none;border-color:transparent!important;} 
+
+
+.login-button {
+	background: url("../images/blue/button-login-n.png") no-repeat;
+	width: 138px;;
+	height: 44px;
+	font-size:14px;
+	border: 0px;
+	outline: none;
+	font-family: "宋体",Verdana, Arial,Sans;	
+	margin-top:10px;
+	color:#FFF;
+
+}
+.login-button:focus {outline:none;}
+/** FF特定效果  **/
+.login-button::-moz-focus-inner{outline:none;border-color:transparent!important;} 
+
+.login-button:hover{
+	background: url("../images/blue/button-login-f.png") no-repeat;
+}
+
+.login-button:active{
+	background: url("../images/blue/button-login-p.png") no-repeat;
+	border: 0px;
+	outline: none;
+	
+}
+
+#copyright{
+	height:50px;
+	color:#CCC;
+	margin-top:50px;
+}
+#copyright a{
+	cursor: pointer;
+}
+.copyright-hr{
+	height:1px;
+	background: #ccc;
+	margin-bottom: 4px;
+}
