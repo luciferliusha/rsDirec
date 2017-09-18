@@ -8,23 +8,28 @@ function tree_leaf_opera(tree_id,isdatatree,treename){
 }
 
 function initListData(tree_id,isdatatree){
-    queryDataTabs(tree_id,isdatatree,1,20,function(data){
-        if(isdatatree=='yes'){
+
+    $("#tree_id_4search").val(tree_id);//设置input值
+    //val = $("#tree_id_4search").attr("value");//获取input值
+    //alert(val);
+    var paraMap={};
+    paraMap['tree_id']=tree_id;
+    paraMap['isdatatree']=isdatatree;
+    paraMap['currentPage']=1;
+    paraMap['pageSize']=20;
+
+    queryDataTabs(paraMap,function(data){
+        if(paraMap['isdatatree']=='yes'){
+            $("#istree").val('yes');//设置input值,说明是点击资源目录跳转过来的
             createAndLoadDatagrid(data);
         }else{
+            $("#istree").val('no');//设置input值,说明是点击服务目录跳转过来的
             createAndLoadServicegrid(data);
         }
     });
 }
 
-function queryDataTabs(tree_id,isdatatree,currentPage,pageSize,callback){
-    var paraMap={};
-    var redirec_url;
-    paraMap['tree_id']=tree_id;
-    paraMap['isdatatree']=isdatatree;
-    paraMap['currentPage']=currentPage;
-    paraMap['pageSize']=pageSize;
-
+function queryDataTabs(paraMap,callback){
     $.ajax({
         type:"POST",   //
         url:'datarsdir/gettreedata.do',
@@ -48,11 +53,12 @@ function createAndLoadDatagrid(temp){
         striped: true,
         singleSelect: true,
         columns: [[
-
             {field: 'TAB_NAME', title: '表名', width: 200, align: "center"},
-            {field: 'TAB_COMMENT', title: '表注释', width: 200, align: "center"},
-            {field: 'TAB_ROWS', title: '记录数', width: 100, align: "center"},
-            {field: 'TAB_RG_TIME', title: '资源注册时间', width: 100, align: "center"}
+            {field: 'TAB_COMMENT', title: '表中文名', width: 200, align: "center"},
+            {field: 'TAB_ROWS', title: '记录数', width: 150, align: "center"},
+            {field: 'TAB_UPDATE_TIME', title: '资源更新时间', width: 150, align: "center"},
+            {field: 'TAB_RG_TIME', title: '资源注册时间', width: 150, align: "center"},
+            {field: 'BEIZHU', title: '表注释', width: 180, align: "center"}
         ]]
     });
     //
@@ -104,4 +110,26 @@ function createAndLoadServicegrid(temp){
         // }
     });
     $("#dg").datagrid('loadData',temp);
+}
+
+function doSearch(){
+    var paraMap={};
+    paraMap['tree_id']=$("#tree_id_4search").attr("value");//获取input值;
+    paraMap['isdatatree']=$("#istree").attr("value");//获取input值;
+    paraMap['TAB_COMMENT_Q']=$("#TAB_COMMENT_Q").attr("value");//获取input值;
+    paraMap['TAB_UPDATE_TIME_Q']=$("#TAB_UPDATE_TIME_Q").attr("value");//获取input值;
+    paraMap['TAB_RG_TIME_Q']=$("#TAB_RG_TIME_Q").attr("value");//获取input值;
+    paraMap['currentPage']=1;
+    paraMap['pageSize']=20;
+    //alert($("#TAB_COMMENT_Q").attr("value"));
+    queryDataTabs(paraMap,function(data){
+        if(paraMap['isdatatree']=='yes'){
+            $("#istree").val('yes');//设置input值,说明是点击资源目录跳转过来的
+            createAndLoadDatagrid(data);
+        }else{
+            $("#istree").val('no');//设置input值,说明是点击服务目录跳转过来的
+            createAndLoadServicegrid(data);
+        }
+    });
+
 }

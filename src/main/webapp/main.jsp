@@ -161,7 +161,7 @@
                 <th data-options="field:'data_from_dept',width:200,align:'center'">数据来源单位名称</th>
                 <th data-options="field:'data_from_system',width:200,align:'center'">数据来源业务系统名称</th>
                 <th data-options="field:'data_etl_type',width:150,align:'center'">数据交换类型</th>
-                <th data-options="field:'data_etl_type',width:100">数据交换频率</th>
+                <th data-options="field:'data_etl_freq',width:100">数据交换频率</th>
                 <th data-options="field:'data_tab_rows',width:150,align:'center'">表记录数（条）</th>
                 <th data-options="field:'data_space_usage',width:150,align:'center'">占用磁盘空间（M）</th>
             </tr>

@@ -283,26 +283,40 @@ if(userinfo!=null){
                                         <li><a id="hzxx">航政信息</a></li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <span>公众数据服务</span>
-                                    <ul>
-                                        <li><a id="gzxxfw">公众信息服务</a></li>
-                                    </ul>
-                                </li>
                             </ul>
                 </div>
             </div>
         </div>
 		<div class="content-right-panel">
-            <div>
 
-            </div>
+                <div id="tb" style="padding:3px">
+                    <form name="searchform" method="post" action="" id ="searchform">
+                        <td width="70" height="100"><strong>表检索：</strong></td>
+                        <td height="100">
+                            <input id="tree_id_4search" type="hidden">
+                            <input id="istree" type="hidden">
+                            表中文名:<input id="TAB_COMMENT_Q">&nbsp;&nbsp;&nbsp;
+                            更新时间: <input id="TAB_UPDATE_TIME_Q" class="easyui-datebox" style="width:110px">&nbsp;&nbsp;&nbsp;
+                            注册时间: <input id="TAB_RG_TIME_Q" class="easyui-datebox" style="width:110px">&nbsp;&nbsp;&nbsp;
+                            <!--Language:
+                            <select class="easyui-combobox" panelHeight="auto" style="width:100px">
+                                <option value="java">Java</option>
+                                <option value="c">C</option>
+                                <option value="basic">Basic</option>
+                                <option value="perl">Perl</option>
+                                <option value="python">Python</option>
+                            </select> -->
+                            <a id="submit_search"  plain="true" onclick="doSearch()">查询</a>
+                        </td>
+                    </form>
+                </div>
+
             <table id="dg" ></table>
         </div>
 	</div>
 	<div class="copyright">
 		<span>
-			<a id="xjjtt" >新疆维吾尔族自治区  交通厅 版权所有</a> |
+			<a id="xjjtt" >新疆维吾尔自治区  交通厅 版权所有</a>
 			<a id="zjcds">浙江协同数据系统有限公司 技术支持</a>
 		</span>
 	</div>

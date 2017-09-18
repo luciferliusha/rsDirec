@@ -29,7 +29,7 @@ public class DataRsDirController {
 
 	@RequestMapping(value="/datarsdir/sjzygk.do",method=RequestMethod.POST, consumes = "application/json")
     @ResponseBody
-	public ModelAndView selectsjgk(@RequestBody Map<String,String> param){//��ѯ������Դ�ſ�
+	public ModelAndView selectsjgk(@RequestBody Map<String,String> param){//
 		String username=param.get("username");
 		Map parm=new HashMap();
 		MappingJacksonJsonView mpjson=new MappingJacksonJsonView();
@@ -45,7 +45,7 @@ public class DataRsDirController {
 
 	@RequestMapping(value="/main/selectDataTabs.do",method=RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
-	public ModelAndView selectDataTabs(@RequestBody Map<String,String> param){//��ѯ������Դ�ſ�
+	public ModelAndView selectDataTabs(@RequestBody Map<String,String> param){//
 
 		int currentPage=Integer.parseInt(param.get("currentPage"));
 		int pageSize=Integer.parseInt(param.get("pageSize"));
@@ -69,7 +69,7 @@ public class DataRsDirController {
 
 	@RequestMapping(value="/datarsdir/adddata.do",method=RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
-	public ModelAndView addData(@RequestBody Map<String,String> param){//��ѯ������Դ�ſ�
+	public ModelAndView addData(@RequestBody Map<String,String> param){//
 
 		String data_dept=param.get("data_dept");
 		String data_group=param.get("data_group");
@@ -120,7 +120,7 @@ public class DataRsDirController {
 
 	@RequestMapping(value="/datarsdir/gettreedata.do",method=RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
-	public ModelAndView getTreeData(@RequestBody Map<String,String> param){//��ѯ������Դ�ſ�
+	public ModelAndView getTreeData(@RequestBody Map<String,String> param){//
 
 		String isdatatree=param.get("isdatatree");
 		String tree_id=param.get("tree_id");
