@@ -93,7 +93,7 @@ public class DataRsDirController {
 
 	@RequestMapping(value="/datarsdir/addservice.do",method=RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
-	public ModelAndView addService(@RequestBody Map<String,String> param){//��ѯ������Դ�ſ�
+	public ModelAndView addService(@RequestBody Map<String,String> param){//
 
 		String service_dept=param.get("service_dept");
 		String service_group=param.get("service_group");
@@ -124,6 +124,9 @@ public class DataRsDirController {
 
 		String isdatatree=param.get("isdatatree");
 		String tree_id=param.get("tree_id");
+		String TAB_COMMENT_Q=param.get("TAB_COMMENT_Q");
+		String TAB_UPDATE_TIME_Q=param.get("TAB_UPDATE_TIME_Q");
+		String TAB_RG_TIME_Q=param.get("TAB_RG_TIME_Q");
 		int currentPage=Integer.parseInt(param.get("currentPage"));
 		int pageSize=Integer.parseInt(param.get("pageSize"));
 		int start=(currentPage-1)*pageSize+1;
@@ -134,11 +137,14 @@ public class DataRsDirController {
 		parm.put("start",start);
 		parm.put("end",end);
 		parm.put("tree_id",tree_id);
+		parm.put("TAB_COMMENT_Q",TAB_COMMENT_Q);
+		parm.put("TAB_UPDATE_TIME_Q",TAB_UPDATE_TIME_Q);
+		parm.put("TAB_RG_TIME_Q",TAB_RG_TIME_Q);
 
 		MappingJacksonJsonView mpjson=new MappingJacksonJsonView();
 		HashMap<String, Object> msgmap=new HashMap<String, Object>();
 		List treeDataList = null;
-		if(isdatatree.equals("yes")){//������Դ����
+		if(isdatatree.equals("yes")){//
 			treeDataList=datarsdirService.getTreeDataByParam(parm);
 		}else {
 			treeDataList=datarsdirService.getTreeServiceByParam(parm);
