@@ -117,8 +117,8 @@ function doSearch(){
     paraMap['tree_id']=$("#tree_id_4search").attr("value");//获取input值;
     paraMap['isdatatree']=$("#istree").attr("value");//获取input值;
     paraMap['TAB_COMMENT_Q']=$("#TAB_COMMENT_Q").attr("value");//获取input值;
-    paraMap['TAB_UPDATE_TIME_Q']=$("#TAB_UPDATE_TIME_Q").attr("value");//获取input值;
-    paraMap['TAB_RG_TIME_Q']=$("#TAB_RG_TIME_Q").attr("value");//获取input值;
+    paraMap['TAB_UPDATE_TIME_Q']=$('#TAB_UPDATE_TIME_Q').datebox('getValue');//获取input值;
+    paraMap['TAB_RG_TIME_Q']=$('#TAB_RG_TIME_Q').datebox('getValue');//获取input值;
     paraMap['currentPage']=1;
     paraMap['pageSize']=20;
     //alert($("#TAB_COMMENT_Q").attr("value"));

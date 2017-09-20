@@ -71,10 +71,16 @@
       SELECT * FROM
         (
         SELECT A.*, ROWNUM RN
-        FROM(select tt.tab_name, tt.tab_rows, tt.tab_comment,tab_rg_time
+        FROM(select tt.tab_name, tt.tab_rows, tt.tab_comment,tab_rg_time,t.tab_update_time
   from tab_scan tt, data_rs_regist t
  where tt.tab_name = t.data_gettype and t.tree_id=#{tree_id}
- group by tt.tab_name, tt.tab_rows, tt.tab_comment , tab_rg_time order by  tt.tab_rows desc)A
+            <if test="TAB_RG_TIME!=null and TAB_RG_TIME!=''">
+                and TAB_RG_TIME=#{TAB_RG_TIME}
+            </if>
+            <if test="TAB_UPDATE_TIME!=null and TAB_UPDATE_TIME!=''">
+                and tab_update_time=#{TAB_UPDATE_TIME}
+            </if>
+        group by tt.tab_name, tt.tab_rows, tt.tab_comment , tab_rg_time,t.tab_update_time order by  tt.tab_rows desc)A
         )
         WHERE RN &gt;= #{start} and RN &lt;=#{end}
 
