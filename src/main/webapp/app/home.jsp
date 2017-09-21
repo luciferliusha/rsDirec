@@ -296,8 +296,8 @@ if(userinfo!=null){
                             <input id="tree_id_4search" type="hidden">
                             <input id="istree" type="hidden">
                             表中文名:<input id="TAB_COMMENT_Q">&nbsp;&nbsp;&nbsp;
-                            更新时间: <input id="TAB_UPDATE_TIME_Q" class="easyui-datebox" style="width:110px">&nbsp;&nbsp;&nbsp;
-                            注册时间: <input id="TAB_RG_TIME_Q" class="easyui-datebox" style="width:110px">&nbsp;&nbsp;&nbsp;
+                            更新时间: <input id="TAB_UPDATE_TIME_Q" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser" style="width:110px">&nbsp;&nbsp;&nbsp;
+                            注册时间: <input id="TAB_RG_TIME_Q" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser" style="width:110px">&nbsp;&nbsp;&nbsp;
                             <!--Language:
                             <select class="easyui-combobox" panelHeight="auto" style="width:100px">
                                 <option value="java">Java</option>

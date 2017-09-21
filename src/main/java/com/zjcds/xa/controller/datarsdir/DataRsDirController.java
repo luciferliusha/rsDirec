@@ -137,9 +137,9 @@ public class DataRsDirController {
 		parm.put("start",start);
 		parm.put("end",end);
 		parm.put("tree_id",tree_id);
-		parm.put("TAB_COMMENT_Q",TAB_COMMENT_Q);
-		parm.put("TAB_UPDATE_TIME_Q",TAB_UPDATE_TIME_Q);
-		parm.put("TAB_RG_TIME_Q",TAB_RG_TIME_Q);
+		parm.put("TAB_COMMENT",TAB_COMMENT_Q);
+		parm.put("TAB_UPDATE_TIME",TAB_UPDATE_TIME_Q);
+		parm.put("TAB_RG_TIME",TAB_RG_TIME_Q);
 
 		MappingJacksonJsonView mpjson=new MappingJacksonJsonView();
 		HashMap<String, Object> msgmap=new HashMap<String, Object>();
