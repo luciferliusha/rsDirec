@@ -25,6 +25,11 @@ public class DataRsDirServiceImpl implements IDataRsDirService{
     public List<DataTabBean> getDataTabs(Map params){
         return dataRsDirDao.getDataTabs(params);
     }
+
+    public List<HashMap> getcols(Map params) {
+        return dataRsDirDao.getcols(params);
+    }
+
     public void addData(Map params){
         dataRsDirDao.addData(params);
     }

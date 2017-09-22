@@ -13,6 +13,7 @@ import java.util.Map;
 public interface IDataRsDirService {
     public List<DataScanBean> getDataScan(Map params);
     public List<DataTabBean> getDataTabs(Map params);
+    public List<HashMap> getcols(Map params);
 
     public void addData(Map parm);
     public void addService(Map parm);

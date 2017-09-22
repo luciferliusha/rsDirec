@@ -94,6 +94,10 @@
         WHERE RN &gt;= #{start} and RN &lt;=#{end}
 
     </select>
+    <select id="getcols" parameterType="HashMap" resultType="HashMap">
+        select t.col_name,t.col_comment,t.data from TAB_SCAN t where t.tab_name=#{TAB_NAME}
+
+    </select>
 	<!--  
 	<insert id="addUser" parameterType="user_xx">    
 	    insert into usertable(userid,username,password)  values(userid_seq.nextval,#{userName},#{password})  

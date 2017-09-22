@@ -155,4 +155,22 @@ public class DataRsDirController {
 		mpjson.setAttributesMap(msgmap);
 		return mv;
 	}
+
+	@RequestMapping(value="/datarsdir/getcols.do",method=RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public ModelAndView getcolsByTabname(@RequestBody Map<String,String> param){//
+
+		String TAB_NAME=param.get("TAB_NAME");
+		String username=param.get("username");
+
+		MappingJacksonJsonView mpjson=new MappingJacksonJsonView();
+		HashMap<String, Object> msgmap=new HashMap<String, Object>();
+		List colDataList = null;
+		colDataList=datarsdirService.getcols(param);
+
+		ModelAndView mv=new ModelAndView(mpjson);
+		msgmap.put("data", colDataList);
+		mpjson.setAttributesMap(msgmap);
+		return mv;
+	}
 }

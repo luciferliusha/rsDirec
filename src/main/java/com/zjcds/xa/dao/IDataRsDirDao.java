@@ -19,4 +19,6 @@ public interface IDataRsDirDao {
     public List<HashMap> getTreeServiceByParam(Map param);
 
     public void addService(Map params);
+
+    public List<HashMap> getcols(Map params);
 }

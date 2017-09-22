@@ -51,6 +51,12 @@ public class DataRsDirDaoImpl  extends MyBaseDao implements IDataRsDirDao{
         this.getSqlSession().insert("addService",params);
     }
 
+    public List<HashMap> getcols(Map params) {
+        List coldatalst=new ArrayList<HashMap>();
+        coldatalst=this.getSqlSession().selectList("getcols",params);
+        return coldatalst;
+    }
+
     public List<HashMap> getTreeDataByParam(Map param){
         List treedatalst=new ArrayList<HashMap>();
         treedatalst=this.getSqlSession().selectList("getTreeData",param);

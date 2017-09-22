@@ -46,8 +46,62 @@ function queryDataTabs(paraMap,callback){
     });
 }
 
+function queryCols(paraMap,callback){
+    $.ajax({
+        type:"POST",   //
+        url:'datarsdir/getcols.do',
+        async:false,
+        data:JSON.stringify(paraMap),
+        //dataType:"json",
+        contentType:'application/json;charset=UTF-8',
+        success:function(result){
+            var s = result.data;
+            //alert(s);
+            callback(s);
+            //window.location = rootPath+'/main.jsp';
+        }//
+    });
+}
+
 function createAndLoadDatagrid(temp){
     $("#dg").datagrid({
+        view: detailview,
+        detailFormatter:function(index,row){
+            return '<div style="padding:2px;position:relative;"><table class="ddv"></table></div>';
+        },
+        onExpandRow: function(index,row){
+            var ddv = $(this).datagrid('getRowDetail',index).find('table.ddv');
+            var paraMap={};
+            var colsdata;
+            paraMap['TAB_NAME']=row.TAB_NAME;
+            queryCols(paraMap,function(data){
+                colsdata=data;
+            });
+            ddv.datagrid({
+                data:colsdata,
+                fitColumns:true,
+                singleSelect:true,
+                rownumbers:true,
+                loadMsg:'',
+                height:'auto',
+                columns:[[
+                    {field:'COL_NAME',title:'字段名',width:20,align:'center'},
+                    {field:'COL_COMMENT',title:'中文名',width:20,align:'center'},
+                    {field:'DATA',title:'数据类型',width:10,align:'center'},
+                    {field:'NULL_RATE',title:'空值率',width:7,align:'center'}
+                ]],
+                onResize:function(){
+                    $('#dg').datagrid('fixDetailRowHeight',index);
+                },
+                onLoadSuccess:function(){
+                    setTimeout(function(){
+                        $('#dg').datagrid('fixDetailRowHeight',index);
+                    },0);
+                }
+            });
+
+            $('#dg').datagrid('fixDetailRowHeight',index);
+        },
         pagination: true,
         rownumbers: true,
         striped: true,
