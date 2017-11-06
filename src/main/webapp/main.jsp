@@ -31,6 +31,7 @@
     <%@include file="common/meta.jsp"%>
     <%@include file="common/js.jsp"%>
     <script type="text/javascript" src="<%= basePath %>js/app/query_report.js"></script>
+    <script type="text/javascript" src="<%= basePath %>js/app/createmytree.js"></script>
     <link type="text/css" rel="stylesheet" href="<%= basePath %>themes/default/css/main.css"></link>
     <link type="text/css" rel="stylesheet" href="<%= basePath %>themes/default/css/home.css"></link>
     <script type="text/javascript">
@@ -90,19 +91,23 @@
             if(nav_id=="a_sjzyml"){//资源目录查询
                //opera_url='main/selectDataTabs.do';
                 redirecturl='/app/home.jsp';
+                window.location = rootPath+redirecturl;
             }else if(nav_id=="a_sjfwml"){//服务查询
                 //opera_url='main/selectServices.do';
                 redirecturl='/app/servicehome.jsp';
+                window.location = rootPath+redirecturl;
             } else if(nav_id=="a_sjzyzc"){//资源注册
-               //opera_url='main/signupData.do';
-                redirecturl='/app/signupdata.jsp';
-            } else if(nav_id=="a_sjfwfb"){//服务发布
-               //opera_url='main/serviceFb_.do';
-                redirecturl='/app/postservice.jsp';
-            }
+                $('#data_dept').combobox({//给弹出框的下拉框组件绑定点击事件
+                    onSelect:function(){
+                        loadTableByDept();
+                    }
+                });
+                $('#w1').window('open');
 
-           //alert(redirecturl);
-            window.location = rootPath+redirecturl;
+            } else if(nav_id=="a_sjfwfb"){//服务发布
+                $('#w2').window('open');
+
+            }
 
 //            $.ajax({
 //                type:"POST",   //http请求方式
@@ -138,11 +143,75 @@
     <div class="top-logo-title">数据资源目录查询系统</div>
     <ul class="top-ul">
         <li id="top_quit">退出</li>
-        <li id="top_update_password">修改密码</li>
         <li id="top_user"></li>
     </ul>
 </div>
 <div style="text-align:center">
+    <div id="w1" class="easyui-window" title="数据资源注册" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:800px;height:500px;padding:10px;">
+            <div class="easyui-layout" data-options="fit:true">
+                <div style="margin-bottom:20px">
+                    <div style="margin-bottom:20px">
+                        <div>资源获取方式（数据库连接字符串（例如：jdbc:oracle:thin:@127.0.0.1:1521:dbname;username;password））</div>
+                        <input id="data_gettype" class="easyui-textbox" style="width:50%;height:32px">
+                    </div>
+                    <div>资源所属单位</div>
+                    <select id="data_dept" class="easyui-combobox"  name="dept" style="width:400px;">
+                        <option value="000">交通厅</option><!-- 依据新疆运维文档0-1-2里面的编号规则-->
+                        <option value="2">交通建设管理局</option>
+                        <option value="1">公路管理局</option>
+                        <option value="4">道路运输管理局</option>
+                        <option value="3">路政管理局</option>
+                        <option value="8">地方海事局</option>
+                        <option value="6">厅农村公路处</option>
+                        <option value="7">厅路网中心</option>
+                    </select>
+                </div>
+                <div style="margin-bottom:20px">
+                    <div>资源所属分类</div>
+                    <input id="data_group" class="easyui-combotree" data-options="url:'<%= basePath %>json/zyssdw_tree.json',method:'get',label:'Select Node:',labelPosition:'top'" style="width:400px;">
+                </div>
+
+                <div style="margin-bottom:20px">
+                    <div>资源名称</div>
+                    <input  id="data_name" class="easyui-combotree" style="width:400px;">
+                </div>
+
+
+                <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+                    <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="javascript:adddata()" style="width:80px">提交</a>
+                    <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="$('#w1').window('close')" style="width:80px">取消</a>
+                </div>
+            </div>
+    </div>
+    <div id="w2" class="easyui-window" title="数据服务发布" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:800px;height:500px;padding:10px;">
+        <div class="easyui-layout" data-options="fit:true">
+            <div style="margin-bottom:20px">
+                <div>服务所属单位</div>
+                <input id="service_dept" class="easyui-textbox"  style="width:50%;height:32px">
+            </div>
+            <div style="margin-bottom:20px">
+                <div>服务所属分类</div>
+                <input  id="service_group" class="easyui-textbox" style="width:50%;height:32px">
+            </div>
+            <div style="margin-bottom:20px">
+                <div>服务名称</div>
+                <input  id="service_name" class="easyui-textbox" style="width:50%;height:32px">
+            </div>
+            <div style="margin-bottom:20px">
+                <div>服务接口</div>
+                <input id="service_gettype" class="easyui-textbox" style="width:50%;height:32px">
+            </div>
+            <div style="margin-bottom:20px">
+                <div>服务说明</div>
+                <input id="service_description" class="easyui-textbox" style="width:50%;height:32px">
+            </div>
+
+            <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+                <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="javascript:addservice()" style="width:80px">提交</a>
+                <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="$('#w2').window('close')" style="width:80px">取消</a>
+            </div>
+        </div>
+    </div>
     <div>
         <nav role="full-horizontal" style="margin:50px 200px;">
             <ul>
@@ -154,10 +223,10 @@
         </nav>
     </div>
 <div style="margin-left: 170px;margin-top: 20px;">
-        <table id="dg" class="easyui-datagrid" title="数据资源概况" style="width:1000px;height:480px;" >
+        <table id="dg" class="easyui-datagrid" title="数据资源概况" style="width:1010px;height:440px;" >
             <thead>
             <tr>
-                <th data-options="field:'id',width:50,align:'center'">序号</th>
+
                 <th data-options="field:'data_from_dept',width:200,align:'center'">数据来源单位名称</th>
                 <th data-options="field:'data_from_system',width:200,align:'center'">数据来源业务系统名称</th>
                 <th data-options="field:'data_etl_type',width:150,align:'center'">数据交换类型</th>

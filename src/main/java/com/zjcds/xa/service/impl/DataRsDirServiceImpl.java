@@ -1,6 +1,5 @@
 package com.zjcds.xa.service.impl;
 
-import com.zjcds.xa.bean.DataScanBean;
 import com.zjcds.xa.bean.DataTabBean;
 import com.zjcds.xa.dao.IDataRsDirDao;
 import com.zjcds.xa.service.IDataRsDirService;
@@ -19,7 +18,7 @@ public class DataRsDirServiceImpl implements IDataRsDirService{
 
     @Autowired
     private IDataRsDirDao dataRsDirDao;
-    public List<DataScanBean> getDataScan(Map params){
+    public List<HashMap> getDataScan(Map params){
         return dataRsDirDao.getDataScanByParam(params);
     }
     public List<DataTabBean> getDataTabs(Map params){

@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="war" name="rsDirecQuery:war">
+  <artifact type="war" build-on-make="true" name="rsDirecQuery:war">
     <output-path>$PROJECT_DIR$/target</output-path>
     <root id="archive" name="rsDirecQuery.war">
       <element id="artifact" artifact-name="rsDirecQuery:war exploded" />

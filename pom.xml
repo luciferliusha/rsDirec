@@ -497,7 +497,38 @@
       <artifactId>xstream</artifactId>
       <version>1.4.4</version>
     </dependency>
-
+    <!-- https://mvnrepository.com/artifact/org.apache.axis/axis -->
+    <dependency>
+      <groupId>org.apache.axis</groupId>
+      <artifactId>axis</artifactId>
+      <version>1.4</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/axis/axis-jaxrpc -->
+    <dependency>
+      <groupId>axis</groupId>
+      <artifactId>axis-jaxrpc</artifactId>
+      <version>1.4</version>
+    </dependency>
+    <dependency>
+      <groupId>axis</groupId>
+      <artifactId>axis-ant</artifactId>
+      <version>1.4</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-discovery</groupId>
+      <artifactId>commons-discovery</artifactId>
+      <version>0.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.lucee</groupId>
+      <artifactId>saaj</artifactId>
+      <version>1.2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>wsdl4j</groupId>
+      <artifactId>wsdl4j</artifactId>
+      <version>1.6.2</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>rsDirecQuery</finalName>

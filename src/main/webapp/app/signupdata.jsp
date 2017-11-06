@@ -79,37 +79,6 @@
 
         }
 
-        function    adddata(){
-
-           // var data_dept=$("input[name='data_dept']").val();
-			var data_dept= $("#data_dept").val();
-
-            var data_group=$("#data_group").val();
-            var data_name=$("#data_name").val();
-            var data_gettype=$("#data_gettype").val();
-
-            //alert(data_dept);
-            var paraMap={};//存放查询数据的参数
-            paraMap["data_dept"] = data_dept;
-            paraMap["data_group"] = data_group;
-            paraMap["data_name"] = data_name;
-            paraMap["data_gettype"] = data_gettype;
-
-            $.ajax({
-                type:"POST",   //http请求方式
-                url:'datarsdir/adddata.do',
-                async:false,
-                data:JSON.stringify(paraMap), //发送给服务器的参数  ,JSON.stringify将json对象转换成json字符串，否则后台bean接收不到,报400,415错误
-                //dataType:"json",  //告诉JQUERY返回的数据格式(注意此处数据格式一定要与提交的controller返回的数据格式一致,不然不会调用回调函数complete)
-                contentType:'application/json;charset=UTF-8',
-                success:function(result){
-                    var s = result.data;
-                    alert("添加数据资源成功");
-                    window.location = rootPath+'/main.jsp';
-                }//定义交互完成,并且服务器正确返回数据时调用回调函数
-            });
-
-        }
 
         function nav_opera(){
             var nav_id=$(this).attr("id");

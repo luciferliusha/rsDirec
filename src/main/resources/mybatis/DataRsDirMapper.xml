@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>  <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="com.zjcds.xa.dao.IDataRsDirDao">
-	<!--  <resultMap type="com.zjcds.xa.bean.UserInfoBean" id="user_xx">
-		<id property="USERID" column="USERID"></id>
-		<id property="GROUPID" column="GROUPID"></id>
-		<id property="GROUPNAME" column="GROUPNAME"></id>
-		<id property="USERNAME" column="USERNAME"></id>
-		<id property="LOGIN_NAME" column="LOGIN_NAME"></id>
-		<id property="PASSWORD" column="PASSWORD"></id>
-	</resultMap>   -->
-	
+
+
 	<select id="getDataScan" parameterType="string" resultType="com.zjcds.xa.bean.DataScanBean">
 	  select t.id,t.id,
             t.data_from_dept,
@@ -16,9 +9,9 @@
             t.data_etl_type,
             t.data_etl_freq,
             t.data_tab_rows,
-            t.data_space_usage from DATA_SCAN t
+            t.data_space_usage from DATA_SCAN t order by t.data_from_dept
 </select>
-    <select id="getDataTabs" parameterType="HashMap" resultType="com.zjcds.xa.bean.DataTabBean">
+    <select id="getDataTabs" parameterType="HashMap" resultType="HashMap">
         SELECT * FROM
         (
         SELECT A.*, ROWNUM RN
@@ -67,34 +60,80 @@
         )
 
     </insert>
-    <select id="getTreeData" parameterType="HashMap" resultType="HashMap">
+    <resultMap type="HashMap" id="TreeDataMap">
+        <result column="tab_name" property="tab_name"/>
+        <result column="tab_rows" property="tab_rows"/>
+        <result column="tab_comment" property="tab_comment"/>
+        <result column="tab_rg_time" property="tab_rg_time"/>
+        <result column="tab_group" property="tab_group"/>
+        <result column="tab_yw_time" property="tab_yw_time"/>
+        <result column="tab_source" property="tab_source"/>
+        <result column="tab_beizhu" property="tab_beizhu"/>
+    </resultMap>
+    <select id="getTreeData" parameterType="HashMap" resultMap="TreeDataMap">
       SELECT * FROM
         (
-        SELECT A.*, ROWNUM RN
-        FROM(select tt.tab_name, tt.tab_rows, tt.tab_comment,tab_rg_time,t.tab_update_time
+        SELECT a.*, ROWNUM RN
+        FROM(select tt.tab_name as tab_name, tt.tab_rows as tab_rows, tt.tab_comment as tab_comment,tab_rg_time as tab_rg_time, tt.tab_group as tab_group,
+        tt.tab_yw_time as tab_yw_time,
+        tt.tab_source as tab_source,
+        tt.tab_beizhu as tab_beizhu
   from tab_scan tt, data_rs_regist t
  where tt.tab_name = t.data_gettype and t.tree_id=#{tree_id}
+        <if test="TAB_COMMENT!=null and TAB_COMMENT!=''">
+            and TAB_COMMENT like   '%${TAB_COMMENT}%'
+        </if>
             <if test="TAB_RG_TIME!=null and TAB_RG_TIME!=''">
                 and TAB_RG_TIME=#{TAB_RG_TIME}
             </if>
             <if test="TAB_UPDATE_TIME!=null and TAB_UPDATE_TIME!=''">
-                and tab_update_time=#{TAB_UPDATE_TIME}
+                and tab_yw_time=#{TAB_UPDATE_TIME}
             </if>
-        group by tt.tab_name, tt.tab_rows, tt.tab_comment , tab_rg_time,t.tab_update_time order by  tt.tab_rows desc)A
+        group by tt.tab_name, tt.tab_rows, tt.tab_comment , tab_rg_time, tt.tab_group,
+        tt.tab_yw_time,
+        tt.tab_source,
+        tt.tab_beizhu order by  tt.tab_rows desc)a
         )
         WHERE RN &gt;= #{start} and RN &lt;=#{end}
 
     </select>
-    <select id="getTreeService" parameterType="HashMap" resultType="HashMap">
-        SELECT * FROM (SELECT A.*, ROWNUM RN
+    <resultMap type="HashMap" id="TreeServiceMap">
+        <result column="rn" property="rn"/>
+        <result column="service_dept" property="service_dept"/>
+        <result column="service_group" property="service_group"/>
+        <result column="service_name" property="service_name"/>
+        <result column="service_gettype" property="service_gettype"/>
+        <result column="service_description" property="service_description"/>
+        <result column="service_rg_time" property="service_rg_time"/>
+    </resultMap>
+    <select id="getTreeService" parameterType="HashMap" resultMap="TreeServiceMap">
+        SELECT * FROM (SELECT a.*, ROWNUM RN
         FROM(select *
         from  data_service_regist t
-        where t.tree_id=#{tree_id})A
+        where t.tree_id=#{tree_id}
+        <if test="SERVICE_NAME!=null and SERVICE_NAME!=''">
+            and SERVICE_NAME like  '%${SERVICE_NAME}%'
+        </if>
+        <if test="SERVICE_DEPT!=null and SERVICE_DEPT!=''">
+            and SERVICE_DEPT like  '%${SERVICE_DEPT}%'
+        </if>
+        <if test="SERVICE_GROUP!=null and SERVICE_GROUP!=''">
+            and SERVICE_GROUP like '%${SERVICE_GROUP}%'
+        </if>
+        <if test="SERVICE_RG_TIME!=null and SERVICE_RG_TIME!=''">
+            and SERVICE_RG_TIME=#{SERVICE_RG_TIME}
+        </if>
+        )a
         )
         WHERE RN &gt;= #{start} and RN &lt;=#{end}
 
     </select>
-    <select id="getcols" parameterType="HashMap" resultType="HashMap">
+    <resultMap type="HashMap" id="colsMap">
+        <result column="col_name" property="col_name"/>
+        <result column="col_comment" property="col_comment"/>
+        <result column="data" property="data"/>
+    </resultMap>
+    <select id="getcols" parameterType="HashMap" resultMap="colsMap">
         select t.col_name,t.col_comment,t.data from TAB_SCAN t where t.tab_name=#{TAB_NAME}
 
     </select>

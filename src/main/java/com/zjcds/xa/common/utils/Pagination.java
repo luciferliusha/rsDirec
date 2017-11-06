@@ -4,16 +4,16 @@ import java.util.Map;
 /**
  *
  * @author renshui
- * 对oracle查询进行分页
+ *
  *
  */
 public class Pagination {
  
- private int startIndex;//rownum的上限
- private int endIndex;//rownum的下限
+ private int startIndex;//rownum
+ private int endIndex;//rownum
  
  /**
-  * 获取oracle rownum的上下限
+  * 取oracle rownum
   * @return
   */
  public Map<String, Integer> getRowNumRang(int totalRow,int currentPage,int pageSize){

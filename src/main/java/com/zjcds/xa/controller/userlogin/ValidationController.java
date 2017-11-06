@@ -41,7 +41,7 @@ public class ValidationController {
        if(dbUser==null){
     	   HashMap<String, String> msgmap=new HashMap<String, String>();
     	   msgmap.put("vstatus", "false");
-    	   msgmap.put("messages", "ÓÃ»§²»´æÔÚ£¡");
+    	   msgmap.put("messages", "ç”¨æˆ·ä¸å­˜åœ¨ï¼");
     	   MappingJacksonJsonView mpjson=new MappingJacksonJsonView();
     	   ModelAndView mv=new ModelAndView(mpjson,msgmap);    	  
     	   return mv;
@@ -56,7 +56,7 @@ public class ValidationController {
            }else{
         	   HashMap<String, String> msgmap=new HashMap<String, String>();
         	   msgmap.put("vstatus", "false");
-        	   msgmap.put("messages", "ÓÃ»§Ãû»òÃÜÂë´íÎó£¡");
+        	   msgmap.put("messages", "ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯ï¼");
         	   MappingJacksonJsonView mpjson=new MappingJacksonJsonView();
         	   ModelAndView mv=new ModelAndView(mpjson,msgmap);    	  
         	   return mv;

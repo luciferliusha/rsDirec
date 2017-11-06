@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="rsDirecQuery:war exploded">
+  <artifact type="exploded-war" build-on-make="true" name="rsDirecQuery:war exploded">
     <output-path>$PROJECT_DIR$/target/rsDirecQuery</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
@@ -95,6 +95,12 @@
           <element id="library" level="project" name="Maven: xpp3:xpp3_min:1.1.4c" />
           <element id="library" level="project" name="Maven: org.eclipse.xsd:xsd:2.2.2" />
           <element id="library" level="project" name="Maven: com.thoughtworks.xstream:xstream:1.4.4" />
+          <element id="library" level="project" name="Maven: org.apache.axis:axis:1.4" />
+          <element id="library" level="project" name="Maven: org.apache.axis:axis-jaxrpc:1.4" />
+          <element id="library" level="project" name="Maven: org.apache.axis:axis-ant:1.4" />
+          <element id="library" level="project" name="Maven: commons-discovery:commons-discovery:0.2" />
+          <element id="library" level="project" name="Maven: org.lucee:saaj:1.2.1" />
+          <element id="library" level="project" name="Maven: wsdl4j:wsdl4j:1.6.2" />
         </element>
       </element>
       <element id="directory" name="META-INF">

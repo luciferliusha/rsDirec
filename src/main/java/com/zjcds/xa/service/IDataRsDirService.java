@@ -1,6 +1,5 @@
 package com.zjcds.xa.service;
 
-import com.zjcds.xa.bean.DataScanBean;
 import com.zjcds.xa.bean.DataTabBean;
 
 import java.util.HashMap;
@@ -11,7 +10,7 @@ import java.util.Map;
  * Created by Administrator on 2017/9/10.
  */
 public interface IDataRsDirService {
-    public List<DataScanBean> getDataScan(Map params);
+    public List<HashMap> getDataScan(Map params);
     public List<DataTabBean> getDataTabs(Map params);
     public List<HashMap> getcols(Map params);
 

@@ -1,6 +1,5 @@
 package com.zjcds.xa.dao.impl;
 
-import com.zjcds.xa.bean.DataScanBean;
 import com.zjcds.xa.bean.DataTabBean;
 import com.zjcds.xa.dao.IDataRsDirDao;
 import com.zjcds.xa.dao.base.MyBaseDao;
@@ -17,11 +16,9 @@ import java.util.Map;
 @Repository
 public class DataRsDirDaoImpl  extends MyBaseDao implements IDataRsDirDao{
 
-    public List<DataScanBean> getDataScanByParam(Map params){
-        List datascanlst=new ArrayList<DataScanBean>();
-        DataScanBean datascan=null;
-        datascan=(DataScanBean)this.getSqlSession().selectOne("getDataScan",params);
-        datascanlst.add(datascan);
+    public List<HashMap> getDataScanByParam(Map params){
+        List datascanlst=new ArrayList<HashMap>();
+        datascanlst=this.getSqlSession().selectList("getDataScan",params);
         return datascanlst;
     }
 
@@ -29,6 +26,7 @@ public class DataRsDirDaoImpl  extends MyBaseDao implements IDataRsDirDao{
         List datatabslst=new ArrayList<DataTabBean>();
         //DataTabBean datastabs=null;
         datatabslst=this.getSqlSession().selectList("getDataTabs",params);
+
         //datatabslst.add(datastabs);
         return datatabslst;
     }
@@ -54,17 +52,23 @@ public class DataRsDirDaoImpl  extends MyBaseDao implements IDataRsDirDao{
     public List<HashMap> getcols(Map params) {
         List coldatalst=new ArrayList<HashMap>();
         coldatalst=this.getSqlSession().selectList("getcols",params);
+
         return coldatalst;
     }
 
     public List<HashMap> getTreeDataByParam(Map param){
         List treedatalst=new ArrayList<HashMap>();
         treedatalst=this.getSqlSession().selectList("getTreeData",param);
+
         return treedatalst;
     }
     public List<HashMap> getTreeServiceByParam(Map param){
         List treeservicelst=new ArrayList<HashMap>();
+
         treeservicelst=this.getSqlSession().selectList("getTreeService",param);
+
         return treeservicelst;
     }
+
+
 }

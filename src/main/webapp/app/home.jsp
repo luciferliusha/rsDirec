@@ -36,6 +36,7 @@ if(userinfo!=null){
 		$(document).ready(function(){
 			$("#top_user").text(ualias);
 			$("#top_quit").click(quitSystem);
+            $("#top_back").click(back_home);
 
             tree_leaf_opera('kyzkybxsj','yes');
 
@@ -47,8 +48,13 @@ if(userinfo!=null){
 		});
 
         function quitSystem(){
-			window.location = rootPath;
-		}
+            window.location = rootPath;
+        }
+
+
+        function back_home(){
+            window.location =  rootPath+"/main.jsp";
+        }
 
 	</script>
   </head>
@@ -57,9 +63,9 @@ if(userinfo!=null){
 	<div class="top">
 		<div class="top-logo-title">数据资源目录查询系统</div>
 		<ul class="top-ul">
-			<li id="top_quit">退出</li>
-			<li id="top_update_password">修改密码</li>
-			<li id="top_user"></li>
+            <li id="top_quit">退出</li>
+            <li id="top_user"></li>
+            <li id="top_back">返回主页</li>
 		</ul>
 	</div>
     <div class="content">
@@ -87,9 +93,9 @@ if(userinfo!=null){
                                         <li>
                                             <span>业户</span>
                                             <ul>
-                                                <li><a id="jtysyhsj">交通运输业户</a></li>
-                                                <li>   <a id=jdcwxjcyhsj">机动车维修/检测业户</a></li>
-                                                <li>  <a id="jdcjsypxyhsj">机动车驾驶员培训业户</a></li>
+                                                <li><a id="jtysyhsj" onclick="tree_leaf_opera('jtysyhsj','yes')">交通运输业户</a></li>
+                                                <li>   <a id="jdcwxjcyhsj" onclick="tree_leaf_opera('jdcwxjcyhsj','yes')">机动车维修/检测业户</a></li>
+                                                <li>  <a id="jdcjsypxyhsj" onclick="tree_leaf_opera('jdcjsypxyhsj','yes')">机动车驾驶员培训业户</a></li>
                                                 <li>  <a id="slysyhsj">水路运输业户</a></li>
                                             </ul>
                                         </li>
@@ -112,9 +118,9 @@ if(userinfo!=null){
                                         <li>
                                             <span>从业人员（船员）</span>
                                             <ul>
-                                                <li ><a id="jtyscyrysj">交通运输从业人员</a></li>
+                                                <li ><a id="jtyscyrysj" onclick="tree_leaf_opera('jtyscyrysj','yes')">交通运输从业人员</a></li>
                                                 <li ><a id="cyxxsj">船员信息</a></li>
-                                                <li ><a id="hyzcsj">货运站（场）</a></li>
+                                                <li ><a id="hyzcsj" onclick="tree_leaf_opera('hyzcsj','yes')">货运站（场）</a></li>
                                                 <li ><a id="kyzkybxsj" onclick="tree_leaf_opera('kyzkybxsj','yes')">客运站及客运班线</a></li>
                                             </ul>
                                         </li>
@@ -126,7 +132,7 @@ if(userinfo!=null){
                                         <li>
                                             <span>工程建设</span>
                                             <ul>
-                                                <li><a id="glgcjsxmsj">公路工程建设项目</a></li>
+                                                <li><a id="glgcjsxmsj" onclick="tree_leaf_opera('glgcjsxmsj','yes')">公路工程建设项目</a></li>
                                                 <li><a id="jtgczljdsj">交通工程质量监督</a></li>
                                                 <li><a id="jtgczjsj">交通工程造价</a></li>
                                                 <li><a id="sygcjsxmsj">水运工程建设项目</a></li>
@@ -146,7 +152,7 @@ if(userinfo!=null){
                                                 <li><a id="gkjyfwglsj">港口经营和服务管理</a></li>
                                                 <li><a id="czwxhwxxsj">船载危险货物信息</a></li>
                                                 <li><a id="glcltxfsj">公路车辆通行费</a></li>
-                                                <li><a id="gllzxxsj">公路路政信息</a></li>
+                                                <li><a id="gllzxxsj" onclick="tree_leaf_opera('gllzxxsj','yes')">公路路政信息</a></li>
                                             </ul>
                                         </li>
                                         <li >
@@ -167,6 +173,7 @@ if(userinfo!=null){
                                         <li><a id="jypxsj">教育培训</a></li>
                                         <li><a id="zcfgsj">政策法规</a></li>
                                         <li><a id="gzxxsj">港政信息</a></li>
+                                        <li><a id="xzzfsj" onclick="tree_leaf_opera('xzzfsj','yes')">行政执法</a></li>
                                         <li><a id="hzxxsj">航政信息</a></li>
                                     </ul>
                                 </li>
@@ -218,7 +225,7 @@ if(userinfo!=null){
                                         <li>
                                             <span>车辆（船舶）</span>
                                             <ul>
-                                                <li> <a id="yycl">营运车辆</a></li>
+                                                <li> <a id="yycl" onclick="tree_leaf_opera('yycl','no')">营运车辆</a></li>
                                                 <li> <a id="cbxx">船舶信息</a></li>
                                             </ul>
                                         </li>
@@ -288,28 +295,14 @@ if(userinfo!=null){
             </div>
         </div>
 		<div class="content-right-panel">
-
+            <input id="tree_id_4search" type="hidden">
+            <input id="istree" type="hidden">
                 <div id="tb" style="padding:3px">
-                    <form name="searchform" method="post" action="" id ="searchform">
-                        <td width="70" height="100"><strong>表检索：</strong></td>
-                        <td height="100">
-                            <input id="tree_id_4search" type="hidden">
-                            <input id="istree" type="hidden">
-                            表中文名:<input id="TAB_COMMENT_Q">&nbsp;&nbsp;&nbsp;
-                            更新时间: <input id="TAB_UPDATE_TIME_Q" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser" style="width:110px">&nbsp;&nbsp;&nbsp;
-                            注册时间: <input id="TAB_RG_TIME_Q" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser" style="width:110px">&nbsp;&nbsp;&nbsp;
-                            <!--Language:
-                            <select class="easyui-combobox" panelHeight="auto" style="width:100px">
-                                <option value="java">Java</option>
-                                <option value="c">C</option>
-                                <option value="basic">Basic</option>
-                                <option value="perl">Perl</option>
-                                <option value="python">Python</option>
-                            </select> -->
-                            <a id="submit_search"  plain="true" onclick="doSearch()">查询</a>
-                        </td>
-                    </form>
+
                 </div>
+            <div id="dlg" class="easyui-window" title="数据资源详情" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:850px;height:500px;padding:10px;">
+                <table id="dlg_dg"></table>
+            </div>
 
             <table id="dg" ></table>
         </div>

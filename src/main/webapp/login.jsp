@@ -24,19 +24,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		});
 		
 		function login(event){
-//			if(event.keyCode==13 || event.keyCode==undefined){  //免登陆修改，2017.5.5
-//			    checkUser();
-//			}
-            window.location = rootPath+"/main.jsp";
+			if(event.keyCode==13 || event.keyCode==undefined){
+			    checkUser();
+			}
+           // window.location = rootPath+"/main.jsp";
         }
 		
 		function checkUser() {  
 	        var uname = $.trim($("#login_name").val());  
 	        var pword = $.trim($("#password").val());
 	        if(uname=="" || uname==null){
+	            alert("用户名不能为空！");
 	        	return;
 	        }
 	        if(pword=="" || pword==null){
+                alert("密码不能为空！");
 	        	return;
 	        }
 	        $.ajax({  
@@ -52,9 +54,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                var returnstr;
 	                //alert(vstatus);
 	                if (vstatus=='false') {   	                
-	                    //alert(messages);
+	                    alert(messages);
 	                } else {
-	                 window.location = rootPath+"/app/home.jsp";            
+	                 window.location = rootPath+"/main.jsp";
 	                }  
 	            }//定义交互完成,并且服务器正确返回数据时调用回调函数   
 	        });  
